@@ -13,8 +13,22 @@
 # limitations under the License.
 workspace(name = "io_bazel_rules_docker")
 
-load("//docker:docker.bzl", "docker_repositories")
+load("//docker:docker.bzl", "docker_repositories", "docker_pull")
 
 # Consumers shouldn't need to do this themselves once WORKSPACE is
 # instantiated recursively.
 docker_repositories()
+
+docker_pull(
+    name = "official_busybox",
+    registry = "index.docker.io",
+    repository = "library/busybox",
+    tag = "1.26",
+)
+
+docker_pull(
+    name = "official_python",
+    registry = "index.docker.io",
+    repository = "library/python",
+    tag = "2.7",
+)
